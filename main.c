@@ -1,6 +1,3 @@
-/*#include <Wire.h>
-#include <LiquidCrystal_I2C.h>*/
-
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
@@ -65,71 +62,84 @@ int main(void){
 
     _delay_ms(1000);
 
-    char state = 0;
+    switch (getchar()){
+      case '1':
+        PORTD |= (1 << salon);
+        break;
+      
+      case '2':
+        PORTD &= ~(1 << salon);
+        break;
+     
+      case '3':
+        PORTD |= (1 << ccp);
+        break;
+      
+      case '4':
+        PORTD &= ~(1 << ccp);
+        break;
+      
+      case '5':
+        PORTD |= (1 << cca);
+        break;
+      
+      case '6':
+        PORTD &= ~(1 << cca);
+        break;
+      
+      case '7':
+        PORTD |= (1 << hall);
+        break;
+      
+      case '8':
+        PORTD &= ~(1 << hall);
+        break;
+      
+      case '9':
+        PORTD |= (1 << wc);
+        break;
+      
+      case 'A':
+        PORTD &= ~(1 << wc);
+        break;
+      
+      case 'B':
+        PORTD |= (1 << cuisine);
+        break;
+      
+      case 'C':
+        PORTD &= ~(1 << cuisine);
+        break;
+      
+      case 'D':
+        PORTB |= (1 << cdc);
+        break;
+      
+      case 'E':
+        PORTB &= ~(1 << cdc);
+        break;
+      
+      case 'F':
+        PORTD |= (1 << salon)
+              |  (1 << ccp)
+              |  (1 << cca)
+              |  (1 << hall)
+              |  (1 << wc)
+              |  (1 << cuisine);
+        PORTB |= (1 << cdc);
+        break;
+      
+      case 'G':
+        PORTD &= ~((1 << salon)
+              |    (1 << ccp)
+              |    (1 << cca)
+              |    (1 << hall)
+              |    (1 << wc)
+              |    (1 << cuisine));
+        PORTB &= ~(1 << cdc);
+        break;
+    }
 
-    state = getchar();
-
-    if (state == '1') {
-      PORTD |= (1 << salon);
-    }
-    else if (state == '2') {
-      PORTD &= ~(1 << salon);
-    }
-    else if (state == '3') {
-      PORTD |= (1 << ccp);
-    }
-    else if (state == '4') {
-      PORTD &= ~(1 << ccp);
-    }
-    else if (state == '5') {
-      PORTD |= (1 << cca);
-    }
-    else if (state == '6') {
-      PORTD &= ~(1 << cca);
-    }
-    else if (state == '7') {
-      PORTD |= (1 << hall);
-    }
-    else if (state == '8') {
-      PORTD &= ~(1 << hall);
-    }
-    else if (state == '9') {
-      PORTD |= (1 << wc);
-    }
-    else if (state == 'A') {
-      PORTD &= ~(1 << wc);
-    }
-    else if (state == 'B') {
-      PORTD |= (1 << cuisine);
-    }
-    else if (state == 'C') {
-      PORTD &= ~(1 << cuisine);
-    }
-      //PORT B
-    else if (state == 'D') {
-      PORTB |= (1 << cdc);
-    }
-    else if (state == 'E') {
-      PORTB &= ~(1 << cdc);
-    }
-    else if (state == 'F') {
-      PORTD |= (1 << salon)
-            |  (1 << ccp)
-            |  (1 << cca)
-            |  (1 << hall)
-            |  (1 << wc)
-            |  (1 << cuisine);
-      PORTB |= (1 << cdc);
-    }
-    else if (state == 'G') {
-      PORTD &= ~((1 << salon)
-            |    (1 << ccp)
-            |    (1 << cca)
-            |    (1 << hall)
-            |    (1 << wc)
-            |    (1 << cuisine));
-      PORTB &= ~(1 << cdc);
-    }
     bool val = ((PINC & (1 << inputPin)) >> inputPin);
     static bool pirState = false;
     if (val == true) {
