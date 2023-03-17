@@ -1,2 +1,2 @@
 # domocode
-welcome to my 2021 project xD
+welcome to our 2021 project xD
