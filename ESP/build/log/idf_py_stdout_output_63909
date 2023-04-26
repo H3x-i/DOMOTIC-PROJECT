@@ -1,0 +1,72 @@
+[1/5] cd /home/vultr/test/domocode/ESP/build/esp-idf/esptool_py && /home/vultr/.espressif/python_env/idf5.1_py3.10_env/bin/python /home/vultr/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/vultr/test/domocode/ESP/build/partition_table/partition-table.bin /home/vultr/test/domocode/ESP/build/domocode.bin
+domocode.bin binary size 0xbd7e0 bytes. Smallest app partition is 0x100000 bytes. 0x42820 bytes (26%) free.
+[2/5] Performing build step for 'bootloader'
+[1/1] cd /home/vultr/test/domocode/ESP/build/bootloader/esp-idf/esptool_py && /home/vultr/.espressif/python_env/idf5.1_py3.10_env/bin/python /home/vultr/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /home/vultr/test/domocode/ESP/build/bootloader/bootloader.bin
+Bootloader binary size 0x6730 bytes. 0x8d0 bytes (8%) free.
+[3/5] No install step for 'bootloader'
+[4/5] Completed 'bootloader'
+[4/5] cd /home/vultr/esp/esp-idf/components/esptool_py && /usr/bin/cmake -D IDF_PATH=/home/vultr/esp/esp-idf -D "SERIAL_TOOL=/home/vultr/.espressif/python_env/idf5.1_py3.10_env/bin/python;;/home/vultr/esp/esp-idf/components/esptool_py/esptool/esptool.py;--chip;esp32" -D "SERIAL_TOOL_ARGS=--before=default_reset;--after=hard_reset;write_flash;@flash_args" -D WORKING_DIRECTORY=/home/vultr/test/domocode/ESP/build -P /home/vultr/esp/esp-idf/components/esptool_py/run_serial_tool.cmake
+esptool esp32 -p /dev/ttyUSB0 -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 40m --flash_size 2MB 0x1000 bootloader/bootloader.bin 0x10000 domocode.bin 0x8000 partition_table/partition-table.bin
+esptool.py v4.5.1
+Serial port /dev/ttyUSB0
+Connecting....
+Chip is ESP32-D0WD-V3 (revision v3.0)
+Features: WiFi, BT, Dual Core, 240MHz, VRef calibration in efuse, Coding Scheme None
+Crystal is 40MHz
+MAC: c0:49:ef:c9:34:ac
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to 460800
+Changed.
+Configuring flash size...
+Flash will be erased from 0x00001000 to 0x00007fff...
+Flash will be erased from 0x00010000 to 0x000cdfff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+Compressed 26416 bytes to 16498...
+Writing at 0x00001000... (50 %)
+Writing at 0x0000769c... (100 %)
+Wrote 26416 bytes (16498 compressed) at 0x00001000 in 0.7 seconds (effective 308.1 kbit/s)...
+Hash of data verified.
+Compressed 776160 bytes to 516535...
+Writing at 0x00010000... (3 %)
+Writing at 0x0001bffb... (6 %)
+Writing at 0x0002702b... (9 %)
+Writing at 0x0002c7fe... (12 %)
+Writing at 0x00035684... (15 %)
+Writing at 0x0003b4e6... (18 %)
+Writing at 0x00040add... (21 %)
+Writing at 0x00045d96... (25 %)
+Writing at 0x0004b156... (28 %)
+Writing at 0x0005048f... (31 %)
+Writing at 0x000557c9... (34 %)
+Writing at 0x0005ab87... (37 %)
+Writing at 0x0005fd94... (40 %)
+Writing at 0x00065482... (43 %)
+Writing at 0x0006a766... (46 %)
+Writing at 0x0006ff9c... (50 %)
+Writing at 0x000755f5... (53 %)
+Writing at 0x0007ad70... (56 %)
+Writing at 0x00080aad... (59 %)
+Writing at 0x000859fe... (62 %)
+Writing at 0x0008a92b... (65 %)
+Writing at 0x0008f92c... (68 %)
+Writing at 0x00094a33... (71 %)
+Writing at 0x00099b32... (75 %)
+Writing at 0x0009ec5f... (78 %)
+Writing at 0x000a40fd... (81 %)
+Writing at 0x000a99f9... (84 %)
+Writing at 0x000af238... (87 %)
+Writing at 0x000b81a3... (90 %)
+Writing at 0x000bfc30... (93 %)
+Writing at 0x000c5658... (96 %)
+Writing at 0x000ca91e... (100 %)
+Wrote 776160 bytes (516535 compressed) at 0x00010000 in 11.7 seconds (effective 529.5 kbit/s)...
+Hash of data verified.
+Compressed 3072 bytes to 103...
+Writing at 0x00008000... (100 %)
+Wrote 3072 bytes (103 compressed) at 0x00008000 in 0.0 seconds (effective 563.2 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting via RTS pin...
